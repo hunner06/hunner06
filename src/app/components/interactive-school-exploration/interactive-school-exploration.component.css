@@ -1,0 +1,32 @@
+/* Add this in your styles.css or school-recommendations.component.css */
+
+.card-img-top {
+    height: 180px; /* Fixed height for images */
+    object-fit: cover; /* Ensures the image covers the area nicely */
+  }
+  
+  .card-title {
+    color: #0056b3; /* Color that matches your app's theme */
+  }
+  
+  .card-text {
+    font-size: 0.9rem; /* Slightly smaller font size for the text */
+  }
+  
+  .btn-outline-primary {
+    width: 100%; /* Full width buttons look more appealing */
+    border: none; /* Optional: remove border for a cleaner look */
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: #0056b3;
+    color: white;
+  }
+  
+  /* Responsive adjustments for better mobile viewing */
+  @media (max-width: 768px) {
+    .card-img-top {
+      height: auto; /* On mobile, let images have their natural height */
+    }
+  }
+  

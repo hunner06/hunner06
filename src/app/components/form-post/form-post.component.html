@@ -1,0 +1,35 @@
+<div class="container mt-5">
+  <h2>Create Your SuperLEX Profile</h2>
+  <h5>This could also be auto generated if need be</h5>
+  <form (ngSubmit)="onSubmit()" class="row g-3">
+    <div class="col-md-6">
+      <label for="inputName" class="form-label">Name</label>
+      <input type="text" class="form-control" id="inputName" [(ngModel)]="user.name" name="name" required>
+    </div>
+    <div class="col-md-6">
+      <label for="inputEmail" class="form-label">Email</label>
+      <input type="email" class="form-control" id="inputEmail" [(ngModel)]="user.email" name="email" required>
+    </div>
+    <div class="col-12">
+      <label for="inputPassword" class="form-label">Password</label>
+      <input type="password" class="form-control" id="inputPassword" [(ngModel)]="user.password" name="password" required>
+    </div>
+    <div class="col-md-6">
+      <label for="lifeSituationSelect" class="form-label">Life Situation</label>
+      <select id="lifeSituationSelect" class="form-select" [(ngModel)]="user.lifeSituation" name="lifeSituation" required>
+        <option *ngFor="let situation of lifeSituations" [value]="situation">{{ situation }}</option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label for="preferenceSelect" class="form-label">Preferences</label>
+      <select id="preferenceSelect" class="form-select" [(ngModel)]="user.preference" name="preference" required>
+        <option *ngFor="let pref of preferences" [value]="pref">{{ pref }}</option>
+      </select>
+    </div>
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Create Profile</button>
+    </div>
+  </form>
+</div>
+
+

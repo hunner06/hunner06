@@ -1,0 +1,136 @@
+<h1>Schools</h1>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>School Name</th>
+      <th>City</th>
+      <th>State</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let school of schools">
+      <tr data-toggle="collapse" data-target="" [attr.data-target]="'#collapse-' + school.id" aria-expanded="false">
+        <td>{{ school.name }}</td>
+        <td>{{ school.city }}</td>
+        <td>{{ school.state }}</td>
+        <td><button class="btn btn-primary" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapseRow' + school.id" aria-expanded="false" aria-controls="collapseExample">
+            <i class="bi bi-list"></i>
+          </button></td>
+      </tr>
+      <tr>
+        <td [attr.colspan]="3">
+          <div class="collapse" id="collapseRow{{school.id}}">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Class Name</th>
+                  <th>Teacher</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let class of getClassesForSchool(school.id)">
+                  <tr data-toggle="collapse" [attr.data-target]="'#collapse-class-' + class.id" aria-expanded="false">
+                    <td>{{ class.name }}</td>
+                    <td>{{ class.teacher }}</td>
+                    <td><button class="btn btn-primary" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapseClassRow' + class.id" aria-expanded="false" aria-controls="collapseExample">
+                        <i class="bi bi-list"></i>
+                      </button></td>
+                  </tr>
+                  <tr>
+                    <td [attr.colspan]="2">
+                      <div class="collapse" id="collapseClassRow{{class.id}}">
+                        <table class="table table-bordered">
+                          <thead>
+                            <tr>
+                              <th>Student Name</th>
+                              <th>Age</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let student of getStudentsForClass(class.id)">
+                              <td>{{ student.name }}</td>
+                              <td>{{ student.age }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+        </td>
+      </tr>
+    </ng-container>
+</tbody>
+</table>
+
+<form class="card text-dark bg-light" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label class="card-header">Type:</label>
+      <select class="form-select form-select-lg mb-3" formControlName="selectedType" required>
+        <option value="">Select a type</option>
+        <option value="school">School</option>
+        <option value="class">Class</option>
+        <option value="student">Student</option>
+      </select>
+    </div>
+    <div *ngIf="myForm.controls['selectedType'].value === 'school'">
+      <div class="form-group">
+        <label>School Name:</label>
+        <input type="text" class="form-control" formControlName="newSchoolName">
+      </div>
+      <div class="form-group">
+        <label>City:</label>
+        <input type="text" class="form-control" formControlName="newSchoolCity">
+      </div>
+      <div class="form-group">
+        <label>State:</label>
+        <input type="text" class="form-control" formControlName="newSchoolState">
+      </div>
+    </div>
+    <div *ngIf="myForm.controls['selectedType'].value === 'class'">
+        <div class="form-group">
+            <label>School:</label>
+            <select class="form-select form-select-lg mb-3" formControlName="selectedSchoolId">
+              <option value="">Select a school</option>
+              <option *ngFor="let school of schools" [value]="school.id">{{ school.name }}</option>
+            </select>
+        </div>
+       
+        <div class="form-group">
+            <label>Class Name:</label>
+            <input type="text" class="form-control" formControlName="newClassName">
+        </div>
+        <div class="form-group">
+            <label>Teacher:</label>
+            <input type="text" class="form-control" formControlName="newClassTeacher">
+        </div>
+    </div>
+    <div *ngIf="myForm.controls['selectedType'].value === 'student'">
+        <div class="form-group">
+            <label>School:</label>
+            <select class="form-select form-select-lg mb-3" formControlName="selectedSchoolId">
+              <option value="">Select a school</option>
+              <option *ngFor="let school of schools" [value]="school.id">{{ school.name }}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Class:</label>
+            <select class="form-control" formControlName="selectedClassId">
+                <option *ngFor="let class of getClassesForSchool(myForm.controls['selectedSchoolId'].value)" [value]="class.id">{{ class.name }}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Student Name:</label>
+            <input type="text" class="form-control" formControlName="newStudentName">
+        </div>
+        <div class="form-group">
+            <label>Age:</label>
+            <input type="number" class="form-control" formControlName="newStudentAge"> 
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Submit</button>
+    <button type="button" class="btn btn-secondary" (click)="resetForm()">Reset</button>
+  </form>

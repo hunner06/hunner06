@@ -1,0 +1,29 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .body-card {
+    height: 100vh; /* Full viewport height */
+    margin: 0;
+    display: flex;
+    overflow: auto;
+    flex-direction: column;
+  }
+
+  /* Style adjustments for mobile view if needed */
+@media (max-width: 575.98px) { 
+    .navbar-brand {
+      font-size: 18px; /* Adjust size as needed for mobile */
+    }
+    .nav-link {
+      font-size: 16px; /* Adjust size as needed for mobile */
+    }
+  }
+  
+  /* Optional: Style the active link to make it more distinct */
+  .nav-link.active {
+    color: #495057;
+    background-color: #e9ecef;
+    border-radius: 0.25rem;
+  }

@@ -1,0 +1,29 @@
+/* src/styles.css or interest-assessment.component.css */
+
+/* Style for the legends for better visual hierarchy */
+legend {
+    width: auto;
+    font-size: 1.25rem;
+    font-weight: bold;
+    padding: 0;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Style for the fieldsets for better visual grouping */
+  fieldset {
+    border: none;
+    padding: 0;
+  }
+  
+  /* Enhance the visual feedback for checkboxes */
+  .form-check-input:checked {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+  }
+  
+  /* Custom styles for the submit button */
+  .btn-primary {
+    padding: 0.5rem 2rem;
+    font-size: 1rem;
+  }
+  

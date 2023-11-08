@@ -1,0 +1,40 @@
+<!-- src/app/school-detail/school-detail.component.html -->
+<div *ngIf="school" class="container my-5">
+    <div class="text-center">
+      <h2 class="display-4">{{ school.name }}</h2>
+      <p class="lead">Explore the details that make this program unique.</p>
+    </div>
+
+    <div class="card my-3">
+      <div class="card-body">
+        <h3 class="card-title text-center">Prerequisites</h3>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" *ngFor="let prerequisite of school.prerequisites">
+            <i class="bi bi-check-circle-fill text-success" *ngIf="prerequisite.fulfilled"></i>
+            <i class="bi bi-x-circle-fill text-danger" *ngIf="!prerequisite.fulfilled"></i>
+            {{ prerequisite.description }}: 
+            <span [ngClass]="{'text-success': prerequisite.fulfilled, 'text-danger': !prerequisite.fulfilled}">
+              {{ prerequisite.fulfilled ? 'Met' : 'Not Met' }}
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card my-3">
+      <div class="card-body">
+        <h3 class="card-title text-center">Program Eligibility</h3>
+        <p class="card-text">{{ school.programEligibility }}</p>
+        <p class="alert alert-warning text-center">Eligibility does not guarantee admission.</p>
+      </div>
+    </div>
+
+    <div class="card my-3">
+      <div class="card-body">
+        <h3 class="card-title text-center">Resources</h3>
+        <div class="d-grid gap-2">
+          <a *ngFor="let resource of school.resources" class="btn btn-primary" href="{{ resource }}" target="_blank">Resource Link</a>
+        </div>
+      </div>
+    </div>
+</div>
